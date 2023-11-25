@@ -4,11 +4,14 @@ body
 }
 
 @keyframes preloaderAnimation
-{}
+{
+  from {width:100%;}
+  to   {width:0%;}
+}
 
 .preloader
 {
-  color: #f7f7f7;
+  color: #6e6e6e;
   position: absolute;
   top: 50%;
   left: 50%;
