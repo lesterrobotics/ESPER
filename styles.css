@@ -12,6 +12,7 @@ body
 .preloader
 {
   color: #6e6e6e;
+  background-color: aqua;
   position: absolute;
   top: 50%;
   left: 50%;
