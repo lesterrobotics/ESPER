@@ -1,7 +1,24 @@
+@keyframes fadeIn {
+  0% {color: white;}
+  50% {color: black;}
+  100% {color: white;}
+}
+
+@keyframes moveToSide {
+  from {left: 50%;}
+  to {left: 5%;}
+}
+
 .gitna {
-  border: 5px round red;
+  color: white;
   position: absolute;
+  left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  animation-name: fadeIn;
+  animation-duration: 2s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
 }
