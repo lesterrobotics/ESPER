@@ -20,6 +20,7 @@
 body {
   background-color: #f7f7f7;
 }
+
 .upper {
   position: absolute;
   animation-name: fadeIn;
