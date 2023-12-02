@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - ESPER</title>
+  <title>ESPER</title>
   <link rel="shortcut icon" href="images/logoICTHS.png" />
   <style>
     body {
@@ -26,16 +26,9 @@
       font-size: 40px;
     }
 
-    .dashboard-container {
-      width: 80%;
-      margin: 0 auto;
+    .options-container {
       text-align: center;
-    }
-
-    .options-box {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 50px;
+      margin-top: 150px;
     }
 
     .option {
@@ -77,30 +70,39 @@
   <div class="header">
     <h1>ESPER</h1>
     <div class="settings">
-      <a href="#">Settings</a>
+      <a href="#" id="settingsLink">Settings</a>
     </div>
   </div>
 
-  <div class="dashboard-container">
-    <div class="options-box">
-      <div class="option">Camera</div>
-      <div class="option">Support</div>
-      <div class="option">Logs</div>
-    </div>
+  <div class="options-container">
+    <div class="option">Camera</div>
+    <div class="option">Support</div>
+    <div class="option">Logs</div>
   </div>
 
   <script>
     // Simulate logout functionality
-    const settingsLink = document.querySelector('.settings a');
+    const settingsLink = document.getElementById('settingsLink');
     settingsLink.addEventListener('click', (e) => {
       e.preventDefault();
-      const logout = confirm('Are you sure you want to logout?');
-      if (logout) {
-        window.location.href = 'index.html'; // Replace with your login page
-      }
+      const settingsContainer = document.querySelector('.settings');
+      const logoutButton = document.createElement('a');
+      logoutButton.textContent = 'Logout';
+      logoutButton.href = '#';
+      logoutButton.style.backgroundColor = '#3498db';
+      logoutButton.style.padding = '5px 10px';
+      logoutButton.style.borderRadius = '5px';
+      logoutButton.style.transition = 'background-color 0.3s';
+      logoutButton.style.marginLeft = '10px';
+      logoutButton.onclick = function() {
+        const logout = confirm('Are you sure you want to logout?');
+        if (logout) {
+          window.location.href = 'index.html'; // Replace with your login page
+        }
+      };
+      settingsContainer.appendChild(logoutButton);
+      settingsLink.remove();
     });
   </script>
 </body>
 </html>
-
-
