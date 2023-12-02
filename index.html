@@ -1,15 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ESPER</title>
-  <link rel="shortcut icon" href="images/logoICTHS.png" />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            background-color: #000000; /* Black background */
+            color: #ffffff; /* White text color */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #3498db; /* Blue heading */
+        }
+
+        input[type="text"],
+        input[type="password"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db; /* Blue input fields */
+            color: #ffffff; /* White text color */
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            background-color: #00CED1; /* Cyan input fields when focused */
+        }
+    </style>
+    <script>
+        function validateLogin() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Check if username and password match the registered credentials
+            if (username === "EsperICTHS" && password === "esper2023") {
+                // Redirect to a new page on successful login
+                window.location.href = "dashboard.html"; // Replace with your dashboard URL
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+
+            return false; // Prevent form submission
+        }
+    </script>
 </head>
 <body>
-  <div class="preloader">
-    <h1>ESPER</h1>
-  </div>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="login-form" onsubmit="return validateLogin()">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
 </body>
 </html>
