@@ -10,13 +10,20 @@
       margin: 0;
       padding: 0;
       font-family: 'Arial', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       background: linear-gradient(to top, #000000 30%, #3498db);
       color: #ffffff;
       overflow: hidden;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 40px;
     }
 
     .dashboard-container {
@@ -25,14 +32,9 @@
       text-align: center;
     }
 
-    h1 {
-      font-size: 40px;
-      margin-bottom: 20px;
-    }
-
-    .dashboard-options {
+    .options-box {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       margin-top: 50px;
     }
 
@@ -63,6 +65,7 @@
       border-radius: 5px;
       background-color: #3498db;
       transition: background-color 0.3s;
+      margin-left: 10px;
     }
 
     .settings a:hover {
@@ -71,18 +74,33 @@
   </style>
 </head>
 <body>
-  <div class="dashboard-container">
+  <div class="header">
     <h1>ESPER</h1>
-    <div class="dashboard-options">
+    <div class="settings">
+      <a href="#">Settings</a>
+    </div>
+  </div>
+
+  <div class="dashboard-container">
+    <div class="options-box">
       <div class="option">Camera</div>
       <div class="option">Support</div>
       <div class="option">Logs</div>
     </div>
-    <div class="settings">
-      <a href="#">Settings</a>
-      <a href="#">Logout</a>
-    </div>
   </div>
+
+  <script>
+    // Simulate logout functionality
+    const settingsLink = document.querySelector('.settings a');
+    settingsLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const logout = confirm('Are you sure you want to logout?');
+      if (logout) {
+        window.location.href = 'index.html'; // Replace with your login page
+      }
+    });
+  </script>
 </body>
 </html>
+
 
