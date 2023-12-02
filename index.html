@@ -8,30 +8,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Nova+Square&display=swap" rel="stylesheet">
   <style>
     body {
-      /* Dark blue to light blue gradient background */
-      background: linear-gradient(180deg, #050b1b 0%, #0c1943 70%, #3482cb 100%);
-      color: #ffffff; /* White text color */
-      font-family: 'Nova Square', sans-serif; /* Use Nova Square font or similar */
       margin: 0;
       padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      font-family: 'Nova Square', sans-serif;
       height: 100vh;
+      background: linear-gradient(to bottom, #00264d 70%, #99ccff 100%); /* Dark blue to light blue gradient */
       position: relative;
-      overflow: hidden; /* Hide overflowing neon elements */
     }
 
     .login-container {
-      width: 300px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
-      z-index: 1;
+      color: #ffffff;
     }
 
     h2 {
-      color: #ffffff;
-      font-size: 48px;
+      font-size: 4em; /* Larger font size */
       margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow */
     }
 
     input[type="text"],
@@ -42,37 +39,39 @@
       margin: 5px 0;
       border: none;
       border-radius: 5px;
-      background-color: #0abde3;
+      background-color: #3498db;
       color: #ffffff;
     }
 
     button {
       cursor: pointer;
+      background-color: #00CED1;
     }
 
     input[type="text"]:focus,
     input[type="password"]:focus {
       outline: none;
-      background-color: #02a1d6;
+      background-color: #00CED1;
     }
 
-    /* Neon cyan elements */
+    .bottom-left-image {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      max-width: 100px;
+      z-index: 1;
+    }
+
+    /* Neon cyan animation */
     .neon-cyan {
       position: absolute;
       top: 0;
-      bottom: 0;
-      width: 10px; /* Adjust width as needed */
-      background-color: #00ffff; /* Neon cyan color */
-      animation: neonEffect 1s ease-in-out infinite alternate;
-    }
-
-    @keyframes neonEffect {
-      0% {
-        height: 10px; /* Neon element initial height */
-      }
-      100% {
-        height: 100%; /* Neon element final height */
-      }
+      width: 10px;
+      height: 100%;
+      background: #00FFFF;
+      filter: blur(10px);
+      opacity: 0;
+      animation: neon-cyan 2s infinite alternate;
     }
 
     .neon-left {
@@ -82,25 +81,34 @@
     .neon-right {
       right: 0;
     }
+
+    @keyframes neon-cyan {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0.5;
+      }
+    }
   </style>
   <script>
     function validateLogin() {
       var username = document.getElementById("username").value;
       var password = document.getElementById("password").value;
 
-      // Check if username and password match the registered credentials
       if (username === "EsperICTHS" && password === "esper2023") {
-        // Redirect to a new page on successful login
-        window.location.href = "dashboard.html"; // Replace with your dashboard URL
+        window.location.href = "dashboard.html";
       } else {
         alert("Invalid username or password. Please try again.");
       }
 
-      return false; // Prevent form submission
+      return false;
     }
   </script>
 </head>
 <body>
+  <img class="bottom-left-image" src="images/White Gear Login.png" alt="White Gear Login">
+  
   <div class="login-container">
     <h2>ESPER</h2>
     <form id="login-form" onsubmit="return validateLogin()">
