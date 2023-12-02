@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ESPER</title>
+  <title>ESPER Dashboard</title>
   <link rel="shortcut icon" href="images/logoICTHS.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(to top, #000000 30%, #3498db);
-      color: #ffffff;
+      font-family: 'Electrolize', sans-serif;
+      background-color: #3498db;
+      color: #000000;
       overflow: hidden;
     }
 
@@ -20,23 +21,26 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px;
+      background-color: #ffffff;
     }
 
-    h1 {
+    .header h1 {
       font-size: 40px;
+      color: #000000;
     }
 
     .options-container {
-      text-align: center;
-      margin-top: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+      gap: 20px;
     }
 
     .option {
-      width: 20%;
-      padding: 10px;
+      padding: 10px 20px;
       border-radius: 5px;
-      background-color: #3498db;
-      margin: 0 10px;
+      background-color: #ffffff;
       cursor: pointer;
       transition: background-color 0.3s;
     }
@@ -46,22 +50,27 @@
     }
 
     .settings {
-      width: 100%;
-      text-align: right;
-      margin-top: 50px;
-    }
-
-    .settings a {
-      text-decoration: none;
-      color: #ffffff;
-      padding: 5px 10px;
+      padding: 10px 20px;
       border-radius: 5px;
-      background-color: #3498db;
+      background-color: #ffffff;
+      cursor: pointer;
       transition: background-color 0.3s;
-      margin-left: 10px;
     }
 
-    .settings a:hover {
+    .settings:hover {
+      background-color: #00CED1;
+    }
+
+    .logout {
+      display: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: #ffffff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .logout:hover {
       background-color: #00CED1;
     }
   </style>
@@ -69,40 +78,24 @@
 <body>
   <div class="header">
     <h1>ESPER</h1>
-    <div class="settings">
-      <a href="#" id="settingsLink">Settings</a>
+    <div class="options-container">
+      <div class="option">Camera</div>
+      <div class="option">Support</div>
+      <div class="option">Logs</div>
+      <div class="settings">Settings</div>
+      <div class="logout">Logout</div>
     </div>
   </div>
 
-  <div class="options-container">
-    <div class="option">Camera</div>
-    <div class="option">Support</div>
-    <div class="option">Logs</div>
-  </div>
-
   <script>
-    // Simulate logout functionality
-    const settingsLink = document.getElementById('settingsLink');
-    settingsLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      const settingsContainer = document.querySelector('.settings');
-      const logoutButton = document.createElement('a');
-      logoutButton.textContent = 'Logout';
-      logoutButton.href = '#';
-      logoutButton.style.backgroundColor = '#3498db';
-      logoutButton.style.padding = '5px 10px';
-      logoutButton.style.borderRadius = '5px';
-      logoutButton.style.transition = 'background-color 0.3s';
-      logoutButton.style.marginLeft = '10px';
-      logoutButton.onclick = function() {
-        const logout = confirm('Are you sure you want to logout?');
-        if (logout) {
-          window.location.href = 'index.html'; // Replace with your login page
-        }
-      };
-      settingsContainer.appendChild(logoutButton);
-      settingsLink.remove();
+    document.querySelector('.settings').addEventListener('click', function() {
+      document.querySelector('.logout').style.display = 'block';
+    });
+
+    document.querySelector('.logout').addEventListener('click', function() {
+      window.location.href = "index.html";
     });
   </script>
 </body>
 </html>
+
