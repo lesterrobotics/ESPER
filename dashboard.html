@@ -81,16 +81,22 @@
       background-color: #ffffff;
       padding: 20px;
       border-top: 2px solid #ccc;
+      text-align: center;
+    }
+
+    .thick-gray-line {
+      border-top: 4px solid #ccc;
+      margin-bottom: 15px;
     }
 
     .esper-camera {
-      margin-bottom: 20px;
       padding: 10px 20px;
       border-radius: 5px;
       background-color: #3498db;
       color: #ffffff;
       cursor: pointer;
       transition: background-color 0.3s;
+      display: none;
     }
 
     .esper-camera:hover {
@@ -111,17 +117,34 @@
   </div>
 
   <div class="white-section">
+    <div class="thick-gray-line"></div>
     <button class="esper-camera">ESPER Camera 1</button>
   </div>
 
   <script>
+    const esperCameraButton = document.querySelector('.esper-camera');
+    const settingsButton = document.querySelector('.settings');
+    const logoutButton = document.querySelector('.logout');
+
+    document.querySelectorAll('.option').forEach((button) => {
+      button.addEventListener('click', () => {
+        esperCameraButton.style.display = 'none';
+        logoutButton.style.display = 'none';
+      });
+    });
+
     document.querySelector('.settings').addEventListener('click', function() {
-      document.querySelector('.logout').style.display = 'block';
+      logoutButton.style.display = 'block';
     });
 
     document.querySelector('.logout').addEventListener('click', function() {
       window.location.href = "index.html";
     });
+
+    document.querySelector('.option:nth-child(1)').addEventListener('click', function() {
+      esperCameraButton.style.display = 'block';
+    });
   </script>
 </body>
 </html>
+
