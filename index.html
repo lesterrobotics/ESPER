@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ESPER</title>
-  <link rel="shortcut icon" href="images/logoICTHS.png" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESPER</title>
+    <link rel="shortcut icon" href="images/logoICTHS.png" />
     <style>
         body {
-            background-color: #000000; /* Black background */
+            /* White to blue gradient background */
+            background: linear-gradient(180deg, #ffffff 0%, #3498db 100%);
             color: #ffffff; /* White text color */
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif; /* Use Roboto font or similar */
             margin: 0;
             padding: 0;
             display: flex;
@@ -28,7 +26,8 @@
         }
 
         h2 {
-            color: #3498db; /* Blue heading */
+            color: #ffffff; /* White heading color */
+            font-family: 'Roboto', sans-serif; /* Use Roboto font or similar */
         }
 
         input[type="text"],
@@ -70,9 +69,10 @@
         }
     </script>
 </head>
+
 <body>
     <div class="login-container">
-        <h2>Login</h2>
+        <h2>ESPER</h2>
         <form id="login-form" onsubmit="return validateLogin()">
             <input type="text" id="username" placeholder="Username" required>
             <input type="password" id="password" placeholder="Password" required>
@@ -80,4 +80,6 @@
         </form>
     </div>
 </body>
+
 </html>
+
