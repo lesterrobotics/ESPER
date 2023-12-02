@@ -8,8 +8,7 @@
     <link rel="shortcut icon" href="images/logoICTHS.png" />
     <style>
         body {
-            /* White to dark blue gradient background */
-            background: linear-gradient(180deg, #3498db 0%, #ffffff 30%);
+            background: linear-gradient(180deg, #0abde3 0%, #004777 60%);
             color: #ffffff; /* White text color */
             font-family: 'Nova Square', sans-serif; /* Use Nova Square font or similar */
             margin: 0;
@@ -39,7 +38,7 @@
             margin: 5px 0;
             border: none;
             border-radius: 5px;
-            background-color: #3498db; /* Blue input fields */
+            background-color: #0abde3; /* Light blue input fields */
             color: #ffffff; /* White text color */
         }
 
@@ -50,7 +49,7 @@
         input[type="text"]:focus,
         input[type="password"]:focus {
             outline: none;
-            background-color: #00CED1; /* Cyan input fields when focused */
+            background-color: #02a1d6; /* Darker blue input fields when focused */
         }
     </style>
     <script>
@@ -58,7 +57,7 @@
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
 
-            // Check if username and password match the registered credentials
+            
             if (username === "EsperICTHS" && password === "esper2023") {
                 // Redirect to a new page on successful login
                 window.location.href = "dashboard.html"; // Replace with your dashboard URL
@@ -83,5 +82,6 @@
 </body>
 
 </html>
+
 
 
