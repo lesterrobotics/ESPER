@@ -11,9 +11,13 @@
       margin: 0;
       padding: 0;
       font-family: 'Electrolize', sans-serif;
+      background-color: #ffffff;
       color: #000000;
       overflow: hidden;
-      background: linear-gradient(to right, #16222A, #3498db); /* Blue-black gradient */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
     }
 
     .header {
@@ -21,7 +25,8 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px;
-      background-color: #3498db; /* Blue */
+      background-color: #3498db;
+      width: 100%;
     }
 
     .header h1 {
@@ -31,67 +36,34 @@
 
     .options-container {
       display: flex;
-      justify-content: center;
-      align-items: center;
       gap: 20px;
     }
 
-    .option {
+    .option, .settings, .logout {
       padding: 10px 20px;
       border-radius: 5px;
       background-color: #3498db;
       color: #ffffff;
       cursor: pointer;
       transition: background-color 0.3s;
-      background: linear-gradient(to right, #16222A, #3498db); /* Blue-black gradient */
     }
 
-    .option:hover {
-      background-color: #00CED1; /* Cyan */
-    }
-
-    .settings {
-      padding: 10px 20px;
-      border-radius: 5px;
-      background-color: #3498db;
-      color: #ffffff;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      background: linear-gradient(to right, #16222A, #3498db); /* Blue-black gradient */
-    }
-
-    .settings:hover {
-      background-color: #00CED1; /* Cyan */
-    }
-
-    .logout {
-      display: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      background-color: #3498db;
-      color: #ffffff;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      background: linear-gradient(to right, #16222A, #3498db); /* Blue-black gradient */
-    }
-
-    .logout:hover {
-      background-color: #00CED1; /* Cyan */
+    .option:hover, .settings:hover, .logout:hover {
+      background-color: #00CED1;
     }
 
     .white-section {
       background-color: #ffffff;
       padding: 20px;
+      border-top: 2px solid #ccc;
       text-align: center;
-      position: relative;
+      margin-top: 30px;
     }
 
     .thick-gray-line {
       border-top: 4px solid #ccc;
       margin-bottom: 15px;
-      position: absolute;
-      width: 100%;
-      top: 0;
+      width: 150px;
     }
 
     .esper-camera {
@@ -101,15 +73,10 @@
       color: #ffffff;
       cursor: pointer;
       transition: background-color 0.3s;
-      display: none;
-      position: relative;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
     }
 
     .esper-camera:hover {
-      background-color: #00CED1; /* Cyan */
+      background-color: #00CED1;
     }
   </style>
 </head>
