@@ -1,21 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - ESPER</title>
+  <link rel="shortcut icon" href="images/logoICTHS.png" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to top, #000000 30%, #3498db);
+      color: #ffffff;
+      overflow: hidden;
+    }
 
-        h1 {
-            color: #3498db; /* Blue heading */
-        }
-    </style>
+    .dashboard-container {
+      width: 80%;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .dashboard-options {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 50px;
+    }
+
+    .option {
+      width: 20%;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #3498db;
+      margin: 0 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .option:hover {
+      background-color: #00CED1;
+    }
+
+    .settings {
+      width: 100%;
+      text-align: right;
+      margin-top: 50px;
+    }
+
+    .settings a {
+      text-decoration: none;
+      color: #ffffff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      background-color: #3498db;
+      transition: background-color 0.3s;
+    }
+
+    .settings a:hover {
+      background-color: #00CED1;
+    }
+  </style>
 </head>
 <body>
-    <h1>ESPER ICTHS</h1>
-    <p>This is a test dashboard page.</p>
+  <div class="dashboard-container">
+    <h1>ESPER</h1>
+    <div class="dashboard-options">
+      <div class="option">Camera</div>
+      <div class="option">Support</div>
+      <div class="option">Logs</div>
+    </div>
+    <div class="settings">
+      <a href="#">Settings</a>
+      <a href="#">Logout</a>
+    </div>
+  </div>
 </body>
 </html>
+
