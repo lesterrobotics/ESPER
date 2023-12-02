@@ -11,9 +11,9 @@
       margin: 0;
       padding: 0;
       font-family: 'Electrolize', sans-serif;
-      background-color: #ffffff;
       color: #000000;
       overflow: hidden;
+      background: linear-gradient(to right, #16222A, #3498db); /* Blue-black gradient */
     }
 
     .header {
@@ -21,7 +21,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px;
-      background-color: #3498db;
+      background-color: #3498db; /* Blue */
     }
 
     .header h1 {
@@ -33,7 +33,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 50px;
       gap: 20px;
     }
 
@@ -44,10 +43,11 @@
       color: #ffffff;
       cursor: pointer;
       transition: background-color 0.3s;
+      background: linear-gradient(to right, #16222A, #3498db); /* Blue-black gradient */
     }
 
     .option:hover {
-      background-color: #00CED1;
+      background-color: #00CED1; /* Cyan */
     }
 
     .settings {
@@ -57,10 +57,11 @@
       color: #ffffff;
       cursor: pointer;
       transition: background-color 0.3s;
+      background: linear-gradient(to right, #16222A, #3498db); /* Blue-black gradient */
     }
 
     .settings:hover {
-      background-color: #00CED1;
+      background-color: #00CED1; /* Cyan */
     }
 
     .logout {
@@ -71,22 +72,26 @@
       color: #ffffff;
       cursor: pointer;
       transition: background-color 0.3s;
+      background: linear-gradient(to right, #16222A, #3498db); /* Blue-black gradient */
     }
 
     .logout:hover {
-      background-color: #00CED1;
+      background-color: #00CED1; /* Cyan */
     }
 
     .white-section {
       background-color: #ffffff;
       padding: 20px;
-      border-top: 2px solid #ccc;
       text-align: center;
+      position: relative;
     }
 
     .thick-gray-line {
       border-top: 4px solid #ccc;
       margin-bottom: 15px;
+      position: absolute;
+      width: 100%;
+      top: 0;
     }
 
     .esper-camera {
@@ -97,10 +102,14 @@
       cursor: pointer;
       transition: background-color 0.3s;
       display: none;
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
     .esper-camera:hover {
-      background-color: #00CED1;
+      background-color: #00CED1; /* Cyan */
     }
   </style>
 </head>
@@ -147,4 +156,3 @@
   </script>
 </body>
 </html>
-
