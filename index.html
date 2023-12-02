@@ -15,14 +15,18 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: linear-gradient(to top, #16222A 30%, #3498db);
-      color: #ffffff;
+      background: linear-gradient(to top, #87CEEB 30%, #3498db);
+      color: #000000;
       overflow: hidden; /* Hide overflow to prevent scrolling */
     }
 
     .login-container {
       text-align: center;
       z-index: 1;
+      background-color: skyblue; /* Login page sky blue color */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
@@ -48,8 +52,16 @@
       margin: 5px 0;
       border: none;
       border-radius: 5px;
-      background-color: #3498db;
-      color: #ffffff;
+      background-color: #ffffff; /* White input fields */
+      color: #000000; /* Black text color */
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    input[type="text"]:hover,
+    input[type="password"]:hover,
+    button:hover {
+      background-color: #00CED1; /* Light cyan on hover */
+      color: #ffffff; /* White text on hover */
     }
 
     button {
@@ -59,7 +71,8 @@
     input[type="text"]:focus,
     input[type="password"]:focus {
       outline: none;
-      background-color: #00CED1;
+      background-color: #00CED1; /* Light cyan on focus */
+      color: #ffffff; /* White text on focus */
     }
 
     .logo-container {
