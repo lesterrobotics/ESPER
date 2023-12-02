@@ -15,28 +15,24 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: linear-gradient(to top, #87CEEB 30%, #3498db);
-      color: #000000;
+      background: linear-gradient(to top, #16222A 30%, #3498db);
+      color: #ffffff;
       overflow: hidden; /* Hide overflow to prevent scrolling */
     }
 
     .login-container {
       text-align: center;
       z-index: 1;
-      background-color: skyblue; /* Login page sky blue color */
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
       font-family: 'Electrolize', sans-serif;
-      font-size: 60px; /* Enlarged ESPER font */
+      font-size: 60px;
       margin-bottom: 5px;
     }
 
     p {
-      font-size: 20px; /* Enlarged paragraph font size */
+      font-size: 20px;
       margin-top: 0;
     }
 
@@ -45,34 +41,41 @@
     }
 
     input[type="text"],
-    input[type="password"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: none;
+      border-radius: 5px;
+      background-color: #3498db;
+      color: #000000; /* Black text color */
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      background-color: #00CED1;
+      color: #ffffff; /* White text color */
+    }
+
     button {
       width: 100%;
       padding: 10px;
       margin: 5px 0;
       border: none;
       border-radius: 5px;
-      background-color: #ffffff; /* White input fields */
-      color: #000000; /* Black text color */
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    input[type="text"]:hover,
-    input[type="password"]:hover,
-    button:hover {
-      background-color: #00CED1; /* Light cyan on hover */
-      color: #ffffff; /* White text on hover */
-    }
-
-    button {
+      background-color: #87CEEB; /* Sky blue button color */
+      color: #ffffff;
       cursor: pointer;
+      transition: background-color 0.3s, color 0.3s; /* Smooth color transition */
     }
 
-    input[type="text"]:focus,
-    input[type="password"]:focus {
+    button:hover {
+      background-color: #5CACEE; /* Lighter sky blue on hover */
+    }
+
+    button:focus {
       outline: none;
-      background-color: #00CED1; /* Light cyan on focus */
-      color: #ffffff; /* White text on focus */
     }
 
     .logo-container {
@@ -81,24 +84,25 @@
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: -1;
-      max-width: 90vw; /* Adjust image size */
-      max-height: 90vh; /* Adjust image size */
+      max-width: 90vw;
+      max-height: 90vh;
     }
+
     .neon-cyan {
       position: absolute;
       top: 0;
       bottom: 0;
-      width: 10px; /* Adjust width as needed */
-      background-color: #00ffff; /* Neon cyan color */
+      width: 10px;
+      background-color: #00ffff;
       animation: neonEffect 1s ease-in-out infinite alternate;
     }
 
     @keyframes neonEffect {
       0% {
-        height: 10px; /* Neon element initial height */
+        height: 10px;
       }
       100% {
-        height: 100%; /* Neon element final height */
+        height: 100%;
       }
     }
 
