@@ -34,14 +34,16 @@
     }
 
     p {
-      font-family: 'Orbitron', sans-serif; /* Changed font to Electrolize */
-      font-size: 15px;
+      font-family: 'Orbitron', sans-serif; /* Changed font to Orbitron */
+      font-size: 20px;
       font-weight: bold; /* Added bold font-weight */
       margin-top: 0;
       letter-spacing: 2px; /* Increased letter spacing */
       text-transform: uppercase;
-      text-align: center;
-      text-outline: 3px 3px #000000; /* Added light blue neon outline */
+      -webkit-text-stroke: 2px black; /* Thick black outline */
+      text-stroke: 2px black; /* Thick black outline */
+      -webkit-text-fill-color: transparent; /* Transparent text fill */
+      text-fill-color: transparent; /* Transparent text fill */
     }
 
     form {
