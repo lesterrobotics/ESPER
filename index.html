@@ -79,11 +79,6 @@
       outline: none;
     }
 
-    .error-message {
-      color: red;
-      margin-top: 10px;
-    }
-
     .logo-container {
       position: absolute;
       top: 50%;
@@ -129,7 +124,6 @@
       <input type="text" id="username" placeholder="Username" required>
       <input type="password" id="password" placeholder="Password" required>
       <button type="submit">Login</button>
-      <p class="error-message" id="error-message"></p> <!-- Error message display -->
     </form>
   </div>
 
@@ -144,20 +138,18 @@
     function validateLogin() {
       var username = document.getElementById("username").value;
       var password = document.getElementById("password").value;
-      var errorMessage = document.getElementById("error-message");
 
       // Check if username and password match the registered credentials
       if (username === "EsperICTHS" && password === "esper2023") {
         // Redirect to a new page on successful login
         window.location.href = "dashboard.html";
-        return true;
       } else {
-        // Display error message
-        errorMessage.textContent = "Invalid username or password. Please try again.";
-        return false;
+        alert("Invalid username or password. Please try again.");
       }
-
+      return false;
+    }
   </script>
 </body>
 </html>
+
 
