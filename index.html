@@ -48,31 +48,25 @@
     }
 
     input[type="text"],
-    input[type="password"] {
-      width: 100%;
+    input[type="password"],
+    button {
+      width: 80%; /* Adjusted width of the input fields and button */
       padding: 10px;
       margin: 5px 0;
-      border: none;
+      border: 2px solid #000000; /* Black outline */
       border-radius: 5px;
-      background-color: #3498db;
+      background-color: #ffffff; /* White background */
       color: #000000; /* Black text color */
     }
 
     input[type="text"]:focus,
     input[type="password"]:focus {
       outline: none;
-      background-color: #00CED1;
-      color: #ffffff; /* White text color */
+      background-color: #f5f5f5; /* Lighter background on focus */
     }
 
     button {
-      width: 80%; /* Adjusted width of the button */
-      padding: 10px;
-      margin: 5px 0;
-      border: none;
-      border-radius: 5px;
       background-color: #87CEEB; /* Sky blue button color */
-      color: #ffffff;
       cursor: pointer;
       transition: background-color 0.3s, color 0.3s; /* Smooth color transition */
     }
