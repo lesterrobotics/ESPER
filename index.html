@@ -6,6 +6,7 @@
   <title>ESPER</title>
   <link rel="shortcut icon" href="images/logoICTHS.png" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -33,94 +34,20 @@
     }
 
     p {
+      font-family: 'Electrolize', sans-serif; /* Changed font to Electrolize */
       font-size: 20px;
       margin-top: 0;
       letter-spacing: 2px; /* Increased letter spacing */
-    }
-
-    form {
-      margin-top: 20px;
-    }
-
-    input[type="text"],
-    input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      border: none;
-      border-radius: 5px;
-      background-color: #3498db;
-      color: #000000; /* Black text color */
-    }
-
-    input[type="text"]:focus,
-    input[type="password"]:focus {
-      outline: none;
-      background-color: #00CED1;
-      color: #ffffff; /* White text color */
-    }
-
-    button {
-      width: 80%; /* Adjusted width of the button */
-      padding: 10px;
-      margin: 5px 0;
-      border: none;
-      border-radius: 5px;
-      background-color: #87CEEB; /* Sky blue button color */
-      color: #ffffff;
-      cursor: pointer;
-      transition: background-color 0.3s, color 0.3s; /* Smooth color transition */
-    }
-
-    button:hover {
-      background-color: #5CACEE; /* Lighter sky blue on hover */
-    }
-
-    button:focus {
-      outline: none;
-    }
-
-    .logo-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: -1;
-      max-width: 90vw;
-      max-height: 90vh;
-    }
-
-    .neon-cyan {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 10px;
-      background-color: #00ffff;
-      animation: neonEffect 1s ease-in-out infinite alternate;
-    }
-
-    @keyframes neonEffect {
-      0% {
-        height: 10px;
-      }
-      100% {
-        height: 100%;
-      }
-    }
-
-    .neon-left {
-      left: 0;
-    }
-
-    .neon-right {
-      right: 0;
+      text-transform: uppercase;
+      text-align: center;
+      text-outline: 2px 2px #000000; /* Added outline */
     }
   </style>
 </head>
 <body>
   <div class="login-container">
     <h1>ESPER</h1>
-    <p>--The Eye that Saves Lives--</p> <!-- Updated paragraph text -->
+    <p>The Eye that Saves Lives</p> <!-- Updated paragraph text -->
     <form id="login-form" onsubmit="return validateLogin()">
       <input type="text" id="username" placeholder="Username" required>
       <input type="password" id="password" placeholder="Password" required>
@@ -152,4 +79,3 @@
   </script>
 </body>
 </html>
-
