@@ -28,13 +28,14 @@
     h1 {
       font-family: 'Electrolize', sans-serif;
       font-size: 60px;
-      margin-bottom: 5px;
+      margin-bottom: 10px; /* Increased margin between ESPER and paragraph */
       text-shadow: 3px 3px 6px #000000; /* Thicker black outline */
     }
 
     p {
       font-size: 20px;
       margin-top: 0;
+      letter-spacing: 2px; /* Increased letter spacing */
     }
 
     form {
@@ -119,7 +120,7 @@
 <body>
   <div class="login-container">
     <h1>ESPER</h1>
-    <p>--The Eye that Saves Life--</p>
+    <p>--The Eye that Saves Lives--</p> <!-- Updated paragraph text -->
     <form id="login-form" onsubmit="return validateLogin()">
       <input type="text" id="username" placeholder="Username" required>
       <input type="password" id="password" placeholder="Password" required>
