@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ESPER</title>
   <link rel="shortcut icon" href="images/logoICTHS.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Bruce+Double&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
@@ -25,95 +25,23 @@
       z-index: 1;
     }
 
+    @font-face {
+      font-family: 'BruceForever';
+      src: url('path/to/BruceForever.woff2') format('woff2'),
+           url('path/to/BruceForever.woff') format('woff');
+      /* Add other formats if available (e.g., .ttf, .otf) */
+      font-weight: normal;
+      font-style: normal;
+    }
+
     h1 {
-      font-family: 'Bruce Double', sans-serif; /* Changing font to Bruce Forever */
+      font-family: 'BruceForever', sans-serif; /* Use Bruce Forever font */
       font-size: 60px;
       margin-bottom: 5px;
       text-shadow: 3px 3px 6px #000000; /* Thicker black outline */
     }
 
-    p {
-      font-size: 20px;
-      margin-top: 0;
-    }
-
-    form {
-      margin-top: 20px;
-    }
-
-    input[type="text"],
-    input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      border: none;
-      border-radius: 5px;
-      background-color: #3498db;
-      color: #000000; /* Black text color */
-    }
-
-    input[type="text"]:focus,
-    input[type="password"]:focus {
-      outline: none;
-      background-color: #00CED1;
-      color: #ffffff; /* White text color */
-    }
-
-    button {
-      width: 80%; /* Adjusted width of the button */
-      padding: 10px;
-      margin: 5px 0;
-      border: none;
-      border-radius: 5px;
-      background-color: #87CEEB; /* Sky blue button color */
-      color: #ffffff;
-      cursor: pointer;
-      transition: background-color 0.3s, color 0.3s; /* Smooth color transition */
-    }
-
-    button:hover {
-      background-color: #5CACEE; /* Lighter sky blue on hover */
-    }
-
-    button:focus {
-      outline: none;
-    }
-
-    .logo-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: -1;
-      max-width: 90vw;
-      max-height: 90vh;
-    }
-
-    .neon-cyan {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 10px;
-      background-color: #00ffff;
-      animation: neonEffect 1s ease-in-out infinite alternate;
-    }
-
-    @keyframes neonEffect {
-      0% {
-        height: 10px;
-      }
-      100% {
-        height: 100%;
-      }
-    }
-
-    .neon-left {
-      left: 0;
-    }
-
-    .neon-right {
-      right: 0;
-    }
+    /* ... (other styles) ... */
   </style>
 </head>
 <body>
@@ -151,3 +79,4 @@
   </script>
 </body>
 </html>
+
