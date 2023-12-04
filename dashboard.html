@@ -98,27 +98,29 @@
   </div>
 
   <script>
-    const esperCameraButton = document.querySelector('.esper-camera');
-    const settingsButton = document.querySelector('.settings');
-    const logoutButton = document.querySelector('.logout');
+    document.addEventListener("DOMContentLoaded", function() {
+      const esperCameraButton = document.querySelector('.esper-camera');
+      const settingsButton = document.querySelector('.settings');
+      const logoutButton = document.querySelector('.logout');
 
-    document.querySelectorAll('.option').forEach((button) => {
-      button.addEventListener('click', () => {
-        esperCameraButton.style.display = 'none';
-        logoutButton.style.display = 'none';
+      document.querySelectorAll('.option').forEach((button) => {
+        button.addEventListener('click', () => {
+          esperCameraButton.style.display = 'none';
+          logoutButton.style.display = 'none';
+        });
       });
-    });
 
-    document.querySelector('.settings').addEventListener('click', function() {
-      logoutButton.style.display = 'block';
-    });
+      document.querySelector('.settings').addEventListener('click', function() {
+        logoutButton.style.display = 'block';
+      });
 
-    document.querySelector('.logout').addEventListener('click', function() {
-      window.location.href = "index.html";
-    });
+      document.querySelector('.logout').addEventListener('click', function() {
+        window.location.href = "index.html";
+      });
 
-    document.querySelector('.option:nth-child(1)').addEventListener('click', function() {
-      esperCameraButton.style.display = 'block';
+      esperCameraButton.addEventListener('click', function() {
+        window.location.href = "https://nbudhs5d.connect.remote.it/Shtml/";
+      });
     });
   </script>
 </body>
