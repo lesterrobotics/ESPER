@@ -43,6 +43,7 @@
       margin-top: 0;
       letter-spacing: 2px;
       text-transform: uppercase;
+      
     }
 
     form {
@@ -139,74 +140,17 @@
   <div class="neon-cyan neon-left"></div>
   <div class="neon-cyan neon-right"></div>
 
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
   <script>
-  OneSignal.push(function() {
-  OneSignal.registerForPushNotifications({
-    modalPrompt: true,
-    autoAcceptTitle: 'Click Allow to receive notifications',
-    autoAcceptTitleForWeb: 'Click Allow to receive notifications via Email',
-    httpPermissionRequest: {
-      enable: true
-    },
-    showCredit: false,
-    promptOptions: {
-      actionMessage: "We'd like to send you notifications",
-      exampleNotificationTitleDesktop: 'This is an example notification title',
-      exampleNotificationMessageDesktop: 'This is an example notification message',
-      exampleNotificationTitleMobile: 'Notification Title',
-      exampleNotificationMessageMobile: 'This is an example notification message'
-    }
-  });
-
-  // Collect user's email address after subscription
-  OneSignal.setEmail(promptEmail);
-});
-    var OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-      OneSignal.init({
-        appId: '24d18be1-2d53-4eb6-97d1-ec19a05ed95a', // Replace with your OneSignal App ID
-      });
-    });
-
-    function displayEmergencyAlert() {
-      alert('EMERGENCY ALERT: Please take immediate action!');
-      // Add further handling or UI changes for the emergency alert on the website
-    }
-
     function validateLogin() {
       var username = document.getElementById("username").value;
       var password = document.getElementById("password").value;
 
       if (username === "EsperICTHS" && password === "esper2023") {
-        // Triggers emergency notification on successful login
-        triggerEmergencyNotification();
         window.location.href = "dashboard.html";
       } else {
         alert("Invalid username or password. Please try again.");
       }
       return false;
-    }
-
-    function triggerEmergencyNotification() {
-      var emergencyMessage = {
-        contents: {
-          en: 'EMERGENCY: Your emergency message here'
-        },
-        headings: {
-          en: 'EMERGENCY ALERT!'
-        },
-      };
-
-      OneSignal.sendNotification(emergencyMessage, function(success) {
-        console.log('Emergency notification sent:', success);
-        if (success) {
-          // Notification sent successfully
-          displayEmergencyAlert(); // Display emergency alert on website
-        } else {
-          // Notification sending failed
-        }
-      });
     }
   </script>
 </body>
