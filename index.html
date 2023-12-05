@@ -43,7 +43,6 @@
       margin-top: 0;
       letter-spacing: 2px;
       text-transform: uppercase;
-      
     }
 
     form {
@@ -140,31 +139,54 @@
   <div class="neon-cyan neon-left"></div>
   <div class="neon-cyan neon-right"></div>
 
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
   <script>
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+      OneSignal.init({
+        appId: '24d18be1-2d53-4eb6-97d1-ec19a05ed95a', // Replace with your OneSignal App ID
+      });
+    });
+
+    function displayEmergencyAlert() {
+      alert('EMERGENCY ALERT: Please take immediate action!');
+      // Add further handling or UI changes for the emergency alert on the website
+    }
+
     function validateLogin() {
       var username = document.getElementById("username").value;
       var password = document.getElementById("password").value;
 
       if (username === "EsperICTHS" && password === "esper2023") {
+        // Triggers emergency notification on successful login
+        triggerEmergencyNotification();
         window.location.href = "dashboard.html";
       } else {
         alert("Invalid username or password. Please try again.");
       }
       return false;
     }
-  </script>
 
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-  <script>
-    var OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-      OneSignal.init({
-        appId: '24d18be1-2d53-4eb6-97d1-ec19a05ed95a',
+    function triggerEmergencyNotification() {
+      var emergencyMessage = {
+        contents: {
+          en: 'EMERGENCY: Your emergency message here'
+        },
+        headings: {
+          en: 'EMERGENCY ALERT!'
+        },
+      };
+
+      OneSignal.sendNotification(emergencyMessage, function(success) {
+        console.log('Emergency notification sent:', success);
+        if (success) {
+          // Notification sent successfully
+          displayEmergencyAlert(); // Display emergency alert on website
+        } else {
+          // Notification sending failed
+        }
       });
-    });
+    }
   </script>
-</body>
-</html>
-
 </body>
 </html>
