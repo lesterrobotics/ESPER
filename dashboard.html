@@ -7,7 +7,7 @@
   <link rel="shortcut icon" href="images/logoICTHS.png" />
   <link href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" rel="stylesheet">
   <style>
-    body {
+ body {
       margin: 0;
       padding: 0;
       font-family: 'Electrolize', sans-serif;
@@ -97,6 +97,8 @@
     <button class="esper-camera">ESPER Camera 1</button>
   </div>
 
+  <!-- OneSignal SDK -->
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const esperCameraButton = document.querySelector('.esper-camera');
@@ -121,7 +123,70 @@
       esperCameraButton.addEventListener('click', function() {
         window.location.href = "https://nbudhs5d.connect.remote.it/Shtml/";
       });
+
+      // OneSignal initialization and email prompt setup
+      var OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: '24d18be1-2d53-4eb6-97d1-ec19a05ed95a', // Replace with your OneSignal App ID
+          promptOptions: {
+            autoRegister: false,
+            allowLocalhostAsSecureOrigin: true,
+            slidedown: {
+              prompts: [
+                {
+                  type: 'email',
+                  autoRegister: true,
+                  text: {
+                    message: 'Subscribe to receive email alerts:',
+                    emailPlaceholder: 'Enter your email',
+                    submit: 'Subscribe',
+                  },
+                },
+              ],
+            },
+          },
+        });
+
+        // Function to display an emergency alert on the website
+        function displayEmergencyAlert() {
+          alert('EMERGENCY ALERT: Please take immediate action!');
+          // Add further handling or UI changes for the emergency alert on the website
+        }
+
+        // Function to trigger an emergency notification
+        function triggerEmergencyNotification() {
+          var emergencyMessage = {
+            contents: {
+              en: 'EMERGENCY: Your emergency message here'
+            },
+            headings: {
+              en: 'EMERGENCY ALERT!'
+            },
+          };
+
+          OneSignal.sendNotification(emergencyMessage, function(success) {
+            console.log('Emergency notification sent:', success);
+            if (success) {
+              // Notification sent successfully
+              displayEmergencyAlert(); // Display emergency alert on website
+            } else {
+              // Notification sending failed
+            }
+          });
+        }
+
+        // Button click event to trigger emergency notification
+        document.querySelector('.emergency-button').addEventListener('click', function() {
+          triggerEmergencyNotification();
+        });
+      });
     });
   </script>
+  
+  <div class="white-section">
+    <div class="thick-gray-line"></div>
+    <button class="emergency-button">Trigger Emergency Alert</button>
+  </div>
 </body>
 </html>
