@@ -141,6 +141,27 @@
 
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
   <script>
+  OneSignal.push(function() {
+  OneSignal.registerForPushNotifications({
+    modalPrompt: true,
+    autoAcceptTitle: 'Click Allow to receive notifications',
+    autoAcceptTitleForWeb: 'Click Allow to receive notifications via Email',
+    httpPermissionRequest: {
+      enable: true
+    },
+    showCredit: false,
+    promptOptions: {
+      actionMessage: "We'd like to send you notifications",
+      exampleNotificationTitleDesktop: 'This is an example notification title',
+      exampleNotificationMessageDesktop: 'This is an example notification message',
+      exampleNotificationTitleMobile: 'Notification Title',
+      exampleNotificationMessageMobile: 'This is an example notification message'
+    }
+  });
+
+  // Collect user's email address after subscription
+  OneSignal.setEmail(promptEmail);
+});
     var OneSignal = window.OneSignal || [];
     OneSignal.push(function() {
       OneSignal.init({
