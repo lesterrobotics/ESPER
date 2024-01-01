@@ -1,7 +1,7 @@
-var noBtn = document.getElementById("no")
+var yesBtn = document.getElementById("yes")
 
 function pressYes() {
-  noBtn.remove()
+  yesBtn.remove()
 }
 
 function pressNo() {
