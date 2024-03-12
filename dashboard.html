@@ -1,192 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ESPER Dashboard</title>
-  <link rel="shortcut icon" href="images/logoICTHS.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" rel="stylesheet">
-  <style>
-  body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Electrolize', sans-serif;
-      background-color: #ffffff;
-      color: #000000;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: url('images/EsperDashboardUI.png') no-repeat center center fixed;
+            background-size: cover;
+            background-position: 5% center;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      background-color: #3498db;
-      width: 100%;
-    }
+        .interface-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin: 10px;
+        }
 
-    .header h1 {
-      font-size: 40px;
-      color: #ffffff;
-    }
+        .settings-dropdown {
+            position: absolute;
+            display: none;
+            background-color: #fff;
+            border: 2px solid #094f7e;
+            border-radius: 10px;
+            margin-top: 14px;
+            padding: 10px;
+            z-index: 1;
+            animation: fadeIn 0.3s ease-in; /* Added fade-in animation */
+        }
 
-    .options-container {
-      display: flex;
-      gap: 20px;
-    }
+        .settings-dropdown a {
+            display: block;
+            color: #094f7e;
+            padding: 10px;
+            text-decoration: none;
+            font-family: 'Electrolize', sans-serif;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            transition: background-color 0.3s;
+        }
 
-    .option, .settings, .logout {
-      padding: 10px 20px;
-      border-radius: 5px;
-      background-color: #3498db;
-      color: #ffffff;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
+        .settings-dropdown a:hover {
+            background-color: #0e5f9e;
+        }
 
-    .option:hover, .settings:hover, .logout:hover {
-      background-color: #00CED1;
-    }
+        button {
+            margin-left: 40px;
+            margin-top: 40px;
+            padding: 10px 35px;
+            font-size: 15px;
+            background-color: #094f7e;
+            color: #fff;
+            font-family: 'Electrolize', sans-serif;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: relative;
+            outline: 4px solid #70c0f5;
+        }
 
-    .white-section {
-      background-color: #ffffff;
-      padding: 20px;
-      border-top: 2px solid #ccc;
-      text-align: center;
-      margin-top: 30px;
-    }
+        button:hover {
+            background-color: #0e5f9e;
+        }
 
-    .thick-gray-line {
-      border-top: 4px solid #ccc;
-      margin-bottom: 15px;
-      width: 150px;
-    }
+        button:hover .settings-dropdown {
+            display: block;
+        }
 
-    .esper-camera {
-      padding: 10px 20px;
-      border-radius: 5px;
-      background-color: #3498db;
-      color: #ffffff;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 
-    .esper-camera:hover {
-      background-color: #00CED1;
-    }
-  </style>
+        h1, p {
+            color: #fff;
+            align-self: center;
+        }
+    </style>
+    <title>Dashboard Interface</title>
 </head>
 <body>
-  <div class="header">
-    <h1>ESPER</h1>
-    <div class="options-container">
-      <div class="option">Camera</div>
-      <div class="option">Support</div>
-      <div class="option">Logs</div>
-      <div class="settings">Settings</div>
-      <div class="logout">Logout</div>
+    <div class="interface-buttons">
+        <button>Camera</button>
+        <button>Logs</button>
+        <button>About</button>
+        <button>Settings
+            <div class="settings-dropdown">
+                <a href="#">Settings</a>
+                <a href="#">About Us</a>
+                <a href="index.html">Logout</a>
+            </div>
+        </button>
     </div>
-  </div>
-
-  <div class="white-section">
-    <div class="thick-gray-line"></div>
-    <button class="esper-camera">ESPER Camera 1</button>
-  </div>
-
-  <!-- OneSignal SDK -->
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const esperCameraButton = document.querySelector('.esper-camera');
-      const settingsButton = document.querySelector('.settings');
-      const logoutButton = document.querySelector('.logout');
-
-      document.querySelectorAll('.option').forEach((button) => {
-        button.addEventListener('click', () => {
-          esperCameraButton.style.display = 'none';
-          logoutButton.style.display = 'none';
-        });
-      });
-
-      document.querySelector('.settings').addEventListener('click', function() {
-        logoutButton.style.display = 'block';
-      });
-
-      document.querySelector('.logout').addEventListener('click', function() {
-        window.location.href = "index.html";
-      });
-
-      esperCameraButton.addEventListener('click', function() {
-        window.location.href = "http://192.168.43.64:8080/video_feed";
-      });
-
-      // OneSignal initialization and email prompt setup
-      var OneSignal = window.OneSignal || [];
-      OneSignal.push(function() {
-        OneSignal.init({
-          appId: '24d18be1-2d53-4eb6-97d1-ec19a05ed95a', // Replace with your OneSignal App ID
-          promptOptions: {
-            autoRegister: false,
-            allowLocalhostAsSecureOrigin: true,
-            slidedown: {
-              prompts: [
-                {
-                  type: 'email',
-                  autoRegister: true,
-                  text: {
-                    message: 'Subscribe to receive email alerts:',
-                    emailPlaceholder: 'Enter your email',
-                    submit: 'Subscribe',
-                  },
-                },
-              ],
-            },
-          },
-        });
-
-        // Function to display an emergency alert on the website
-        function displayEmergencyAlert() {
-          alert('EMERGENCY ALERT: Please take immediate action!');
-          // Add further handling or UI changes for the emergency alert on the website
-        }
-
-        // Function to trigger an emergency notification
-        function triggerEmergencyNotification() {
-          var emergencyMessage = {
-            contents: {
-              en: 'EMERGENCY: Your emergency message here'
-            },
-            headings: {
-              en: 'EMERGENCY ALERT!'
-            },
-          };
-
-          OneSignal.sendNotification(emergencyMessage, function(success) {
-            console.log('Emergency notification sent:', success);
-            if (success) {
-              // Notification sent successfully
-              displayEmergencyAlert(); // Display emergency alert on website
-            } else {
-              // Notification sending failed
-            }
-          });
-        }
-
-        // Button click event to trigger emergency notification
-        document.querySelector('.emergency-button').addEventListener('click', function() {
-          triggerEmergencyNotification();
-        });
-      });
-    });
-  </script>
-  
-  <div class="white-section">
-    <div class="thick-gray-line"></div>
-    <button class="emergency-button">Trigger Emergency Alert</button>
-  </div>
 </body>
 </html>
