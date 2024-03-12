@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -68,11 +71,15 @@
         }
 
         button:hover {
-            background-color: #0e5f9e;
+            background-color: rgb(14, 95, 158);
         }
 
         button:hover .settings-dropdown {
             display: block;
+        }
+
+        button:disabled {
+            background-color: rgba(14, 95, 158, .2);
         }
 
         @keyframes fadeIn {
@@ -84,10 +91,36 @@
             }
         }
 
-        h1, p {
-            color: #fff;
+        h1, p, h2 {
+            color: white;
             align-self: center;
         }
+
+        #container {
+            padding: 30px;
+            align-items: center;
+        }
+
+        #spacer {
+            padding: 40px;
+        }
+
+        #camera1 {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: black;
+            width: 500px;
+            height: 300px;
+            border-radius: 30px;
+            padding: 15px;
+            font-family: "Titillium Web";
+
+        }
+
+        .center {
+            text-align: center;
+        }
+
+
     </style>
     <title>Dashboard Interface</title>
 </head>
@@ -104,5 +137,146 @@
             </div>
         </button>
     </div>
+    <div id="spacer"></div>
+    <div id="container">
+        <div class="center" id="camera1">
+            <h1 class="center">Camera 1</h1>
+            <h2 id="statusText" class="center">Loading...</h2>
+            <h2 class="center"></h2>
+            <h2 class="center"></h2>
+            <button id="confirmButton">Confirm</button>
+            <button id="declineButton">Decline</button>
+        </div>
+    </div>
+
+<!-- JAVASCRIPT -->
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
+    import {getDatabase, onValue, ref, get, update, onChildRemoved} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+    
+const appSettings = {
+    databaseURL: "https://esper1-default-rtdb.asia-southeast1.firebasedatabase.app/"
+}
+const app = initializeApp(appSettings)
+const database = getDatabase(app)
+const alertsRef = ref(database, "/")
+
+let statusTextEl = document.getElementById("statusText")
+let confirmButtonEl = document.getElementById("confirmButton")
+let declineButtonEl = document.getElementById("declineButton")
+
+
+onValue(alertsRef, (s) => {
+
+if (s.val() == null) return
+
+let alertsArr = Object.entries(s.val())
+
+let lastAlertStatus = alertsArr[alertsArr.length-1][1]["status"]
+let lastAlertType = alertsArr[alertsArr.length-1][1]["typeOfEmergency"]
+
+if (lastAlertStatus == "unanswered") {
+
+    statusTextEl.innerHTML = lastAlertType
+    
+    buttonStatus(false)
+
+} else {
+
+    statusTextEl.innerHTML = "Waiting an alarm..."
+
+    buttonStatus(true)
+
+}
+
+})
+
+function confirmButton() {
+
+get(alertsRef).then((s) => {
+
+    if (s.val() == null) return
+
+    let alertsArr = Object.entries(s.val())
+    let lastAlertID = alertsArr[alertsArr.length-1][0]
+    let lastAlertStatus = alertsArr[alertsArr.length-1][1]["status"]
+
+    if (lastAlertStatus == "unanswered") {
+
+        update(ref(database, "/"+lastAlertID+"/"), {
+
+            status: "confirmed",
+            timeResponded: getCurrentTime()
+
+        })
+
+    }
+
+})
+
+}
+
+function declineButton() {
+
+get(alertsRef).then((s) => {
+
+    if (s.val() == null) return
+
+    let alertsArr = Object.entries(s.val())
+    let lastAlertID = alertsArr[alertsArr.length-1][0]
+    let lastAlertStatus = alertsArr[alertsArr.length-1][1]["status"]
+
+    if (lastAlertStatus == "unanswered") {
+
+        update(ref(database, "/"+lastAlertID+"/"), {
+
+            status: "declined",
+            timeResponded: getCurrentTime()
+
+        })
+
+    }
+
+    })
+
+}
+
+function buttonStatus(trueOrFalse) {
+
+    if (trueOrFalse) {
+
+        confirmButtonEl.setAttribute("disabled", trueOrFalse)
+        declineButtonEl.setAttribute("disabled", trueOrFalse)
+
+    } else {
+
+        confirmButtonEl.removeAttribute("disabled")
+        declineButtonEl.removeAttribute("disabled")
+        
+    }
+
+}
+
+confirmButtonEl.addEventListener("click", confirmButton)
+declineButtonEl.addEventListener("click", declineButton)
+
+function getCurrentTime() {
+// Create a new Date object
+var currentDate = new Date();
+
+// Get the current hour, minute, and second
+var currentHour = currentDate.getHours();
+var currentMinute = currentDate.getMinutes();
+var currentSecond = currentDate.getSeconds();
+
+// Add leading zeros if necessary
+currentHour = (currentHour < 10 ? "0" : "") + currentHour;
+currentMinute = (currentMinute < 10 ? "0" : "") + currentMinute;
+currentSecond = (currentSecond < 10 ? "0" : "") + currentSecond;
+
+// Return the current time in the format "hh:mm:ss"
+return currentHour + ":" + currentMinute + ":" + currentSecond;
+}
+</script>
 </body>
 </html>
