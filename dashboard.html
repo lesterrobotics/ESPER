@@ -126,8 +126,8 @@
 </head>
 <body>
     <div class="interface-buttons">
-        <button>Camera</button>
-        <button>Logs</button>
+        <button onclick="window.location.href='dashboard.html'">Camera</button>
+        <button onclick="window.location.href='logs.html'">Logs</button>
         <button>About</button>
         <button>Settings
             <div class="settings-dropdown">
@@ -164,6 +164,7 @@ const alertsRef = ref(database, "/")
 let statusTextEl = document.getElementById("statusText")
 let confirmButtonEl = document.getElementById("confirmButton")
 let declineButtonEl = document.getElementById("declineButton")
+let camera1DivEl = document.getElementById("camera1")
 
 
 onValue(alertsRef, (s) => {
@@ -205,7 +206,7 @@ get(alertsRef).then((s) => {
 
         update(ref(database, "/"+lastAlertID+"/"), {
 
-            status: "confirmed",
+            status: "Confirmed",
             timeResponded: getCurrentTime()
 
         })
@@ -230,7 +231,7 @@ get(alertsRef).then((s) => {
 
         update(ref(database, "/"+lastAlertID+"/"), {
 
-            status: "declined",
+            status: "Declined",
             timeResponded: getCurrentTime()
 
         })
@@ -247,11 +248,13 @@ function buttonStatus(trueOrFalse) {
 
         confirmButtonEl.setAttribute("disabled", trueOrFalse)
         declineButtonEl.setAttribute("disabled", trueOrFalse)
+        camera1DivEl.style.backgroundColor = rgba(0, 0, 0, 0.6)
 
     } else {
 
         confirmButtonEl.removeAttribute("disabled")
         declineButtonEl.removeAttribute("disabled")
+        camera1DivEl.style.backgroundColor = rgba(0, 0, 0, 0.6)
         
     }
 
@@ -261,21 +264,17 @@ confirmButtonEl.addEventListener("click", confirmButton)
 declineButtonEl.addEventListener("click", declineButton)
 
 function getCurrentTime() {
-// Create a new Date object
-var currentDate = new Date();
+    var currentDate = new Date();
 
-// Get the current hour, minute, and second
-var currentHour = currentDate.getHours();
-var currentMinute = currentDate.getMinutes();
-var currentSecond = currentDate.getSeconds();
+    var currentHour = currentDate.getHours();
+    var currentMinute = currentDate.getMinutes();
+    var currentSecond = currentDate.getSeconds();
 
-// Add leading zeros if necessary
-currentHour = (currentHour < 10 ? "0" : "") + currentHour;
-currentMinute = (currentMinute < 10 ? "0" : "") + currentMinute;
-currentSecond = (currentSecond < 10 ? "0" : "") + currentSecond;
+    currentHour = (currentHour < 10 ? "0" : "") + currentHour;
+    currentMinute = (currentMinute < 10 ? "0" : "") + currentMinute;
+    currentSecond = (currentSecond < 10 ? "0" : "") + currentSecond;
 
-// Return the current time in the format "hh:mm:ss"
-return currentHour + ":" + currentMinute + ":" + currentSecond;
+    return currentHour + ":" + currentMinute + ":" + currentSecond;
 }
 </script>
 </body>
