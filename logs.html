@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: url('images/ESPERDashboard2.png') no-repeat center center fixed;
+            background-size: cover;
+            background-position: 5% center;
+            display: flex;
+            flex-direction: column;
+            font-family: "Titillium Web";
+            color: white;
+        }
+
+        .interface-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin: 10px;
+        }
+
+        .settings-dropdown {
+            position: absolute;
+            display: none;
+            background-color: #fff;
+            border: 2px solid #094f7e;
+            border-radius: 10px;
+            margin-top: 14px;
+            padding: 10px;
+            z-index: 1;
+            animation: fadeIn 0.3s ease-in; /* Added fade-in animation */
+        }
+
+        .settings-dropdown a {
+            display: block;
+            color: #094f7e;
+            padding: 10px;
+            text-decoration: none;
+            font-family: 'Electrolize', sans-serif;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .settings-dropdown a:hover {
+            background-color: #0e5f9e;
+        }
+
+        button {
+            margin-left: 40px;
+            margin-top: 40px;
+            padding: 10px 35px;
+            font-size: 15px;
+            background-color: #094f7e;
+            color: #fff;
+            font-family: 'Electrolize', sans-serif;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: relative;
+            outline: 4px solid #70c0f5;
+        }
+
+        button:hover {
+            background-color: rgb(14, 95, 158);
+        }
+
+        button:hover .settings-dropdown {
+            display: block;
+        }
+
+        button:disabled {
+            background-color: rgba(14, 95, 158, .2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1, p, h2 {
+            color: white;
+            align-self: center;
+        }
+
+        #container {
+            padding: 30px;
+            align-items: center;
+        }
+
+        #spacer {
+            padding: 40px;
+        }
+
+        #camera1 {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: black;
+            width: 500px;
+            height: 300px;
+            border-radius: 30px;
+            padding: 15px;
+            font-family: "Titillium Web";
+
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .test {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        #logsContainer {
+            text-align: left;
+            padding-top: 120px;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-bottom: 50px;
+        }
+
+        #logslogsContainer {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 50px;
+            border-radius: 30px;    
+        }
+
+        .parent {
+            display: flex;
+            justify-content: space-between; /* Distribute space between child elements */
+            border-bottom: 1px white solid;
+        }
+
+        .child {
+            flex: 1; /* Each child takes equal space */
+            /* Optionally, you can add other styles for the child elements */
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+
+    </style>
+    <title>Dashboard Interface</title>
+</head>
+<body>
+    <div class="interface-buttons">
+        <button onclick="window.location.href='dashboard.html'">Camera</button>
+        <button onclick="window.location.href='logs.html'">Logs</button>
+        <button>About</button>
+        <button>Settings
+            <div class="settings-dropdown">
+                <a href="#">Settings</a>
+                <a href="#">About Us</a>
+                <a href="index.html">Logout</a>
+            </div>
+        </button>
+    </div>
+    <div id="logsContainer">
+        <div id="logslogsContainer">
+            <div class="parent">
+                <div class="child">Camera</div>
+                <div class="child">Date</div>
+                <div class="child">Alert Type</div>
+                <div class="child">Status</div>
+                <div class="child">Time Called</div>
+            </div>
+            <div id="idContainer"></div>
+        </div>
+    </div>
+
+<!-- JAVASCRIPT -->
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
+    import {getDatabase, onValue, ref, get, update, onChildRemoved} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+    
+const appSettings = {
+    databaseURL: "https://esper1-default-rtdb.asia-southeast1.firebasedatabase.app/"
+}
+const app = initializeApp(appSettings)
+const database = getDatabase(app)
+const alertsRef = ref(database, "/")
+
+let logsContainerDivEl = document.getElementById("idContainer")
+
+onValue(alertsRef, (s) => {
+    if (s.val() == null) return
+    
+    let alertsArr = Object.entries(s.val())
+
+    logsContainerDivEl.innerHTML = ""
+
+    for (let i = alertsArr.length-1; i >= 0; i--) {
+        let alertCameraID = alertsArr[i][1]["cameraID"]
+        let alertDate = alertsArr[i][1]["date"]
+        let alertType = alertsArr[i][1]["typeOfEmergency"]
+        let alertStatus = alertsArr[i][1]["status"]
+        let alertTimeCalled = alertsArr[i][1]["timeCalled"]
+
+        // Create a new div element for each log entry
+        let logEntry = document.createElement("div")
+        logEntry.classList.add("parent")
+        
+        // Create child elements for each attribute of the log entry
+        let cameraIDChild = document.createElement("div")
+        cameraIDChild.classList.add("child")
+        cameraIDChild.textContent = alertCameraID
+
+        let dateChild = document.createElement("div")
+        dateChild.classList.add("child")
+        dateChild.textContent = alertDate
+
+        let typeChild = document.createElement("div")
+        typeChild.classList.add("child")
+        typeChild.textContent = alertType
+
+        let statusChild = document.createElement("div")
+        statusChild.classList.add("child")
+        statusChild.textContent = alertStatus
+
+        let timeCalledChild = document.createElement("div")
+        timeCalledChild.classList.add("child")
+        timeCalledChild.textContent = alertTimeCalled
+
+        // Append all child elements to the log entry
+        logEntry.appendChild(cameraIDChild)
+        logEntry.appendChild(dateChild)
+        logEntry.appendChild(typeChild)
+        logEntry.appendChild(statusChild)
+        logEntry.appendChild(timeCalledChild)
+
+        // Append the log entry to the logs container
+        logsContainerDivEl.appendChild(logEntry)
+    }
+})
+
+
+function getCurrentTime() {
+    // Create a new Date object
+    var currentDate = new Date();
+
+    // Get the current hour, minute, and second
+    var currentHour = currentDate.getHours();
+    var currentMinute = currentDate.getMinutes();
+    var currentSecond = currentDate.getSeconds();
+
+    // Add leading zeros if necessary
+    currentHour = (currentHour < 10 ? "0" : "") + currentHour;
+    currentMinute = (currentMinute < 10 ? "0" : "") + currentMinute;
+    currentSecond = (currentSecond < 10 ? "0" : "") + currentSecond;
+
+    // Return the current time in the format "hh:mm:ss"
+    return currentHour + ":" + currentMinute + ":" + currentSecond;
+}
+</script>
+</body>
+</html>
