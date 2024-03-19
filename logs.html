@@ -239,7 +239,7 @@ onValue(alertsRef, (s) => {
 
         let timeCalledChild = document.createElement("div")
         timeCalledChild.classList.add("child")
-        timeCalledChild.innerHTML = "<a href='https://firebasestorage.googleapis.com/v0/b/esper1.appspot.com/o/" + formatDateTime(alertDate, alertTimeCalled) + "?alt=media&token=c2ab3301-8e8d-44bb-a27f-b2aeb6f06570'>" + alertTimeCalled + "</a>"
+        timeCalledChild.innerHTML = "<a href='https://firebasestorage.googleapis.com/v0/b/esper1.appspot.com/o/" + formatDateTime(alertDate, alertTimeCalled) + ".jpg?alt=media&token=c2ab3301-8e8d-44bb-a27f-b2aeb6f06570'>" + alertTimeCalled + "</a>"
 
         // Append all child elements to the log entry
         logEntry.appendChild(cameraIDChild)
@@ -255,7 +255,7 @@ onValue(alertsRef, (s) => {
 //esper1.appspot.com
 function formatDateTime(dateStr, timeStr) {
     // Split date string into year, month, and day
-    const [year, month, day] = dateStr.split('-');
+    const [month, day, year] = dateStr.split('-');
     
     // Split time string into hours, minutes, and seconds
     const [hours, minutes, seconds] = timeStr.split(':');
