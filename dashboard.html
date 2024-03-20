@@ -113,6 +113,8 @@
             border-radius: 30px;
             padding: 15px;
             font-family: "Titillium Web";
+            outline: 4px solid #70c0f5;
+
 
         }
 
@@ -190,6 +192,7 @@ onValue(alertsRef, (s) => {
 if (s.val() == null) return
 
 let alertsArr = Object.entries(s.val())
+let audio = new Audio("ESPERalarm.mp3")
 
 let lastAlertStatus = alertsArr[alertsArr.length-1][1]["status"]
 let lastAlertType = alertsArr[alertsArr.length-1][1]["typeOfEmergency"]
@@ -205,6 +208,21 @@ if (lastAlertStatus == "unanswered") {
     
     buttonStatus(false)
 
+    switch (lastAlertType) {
+        case "Police Alert!":
+            camera1DivEl.style.backgroundColor = "00bbff"
+
+        case "Medical Alert!":
+            camera1DivEl.style.backgroundColor = "ff0000"
+        
+        case "Disaster Alert!":
+            camera1DivEl.style.backgroundColor = "11ff00"
+    }
+
+    audio.play()
+
+
+
 } else {
 
     statusTextEl.innerHTML = "Waiting an alarm..."
@@ -213,6 +231,8 @@ if (lastAlertStatus == "unanswered") {
     setTimeout(()=>{imageEl.setAttribute('src',"")},0)
 
     buttonStatus(true)
+
+    camera1DivEl.style.backgroundColor = "rgba(0, 0, 0, 0.6)"
 
 }
 
@@ -274,13 +294,12 @@ function buttonStatus(trueOrFalse) {
 
         confirmButtonEl.setAttribute("disabled", trueOrFalse)
         declineButtonEl.setAttribute("disabled", trueOrFalse)
-        camera1DivEl.style.backgroundColor = "rgba(0, 0, 0, 0.6)"
+        
 
     } else {
 
         confirmButtonEl.removeAttribute("disabled")
         declineButtonEl.removeAttribute("disabled")
-        camera1DivEl.style.backgroundColor = "red"
         
     }
 
