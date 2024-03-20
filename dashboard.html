@@ -96,20 +96,22 @@
             align-self: center;
         }
 
-        #container {
-            padding: 30px;
+        .container {
+            padding: 25px;
             align-items: center;
+            display:flex;
+            gap: 20px;
+            justify-content: center;
         }
 
         #spacer {
             padding: 40px;
         }
 
-        #camera1 {
+        .camera1 {
             background-color: rgba(0, 0, 0, 0.6);
             color: black;
             width: 500px;
-            height: 300px;
             border-radius: 30px;
             padding: 15px;
             font-family: "Titillium Web";
@@ -118,8 +120,16 @@
 
         }
 
+        .huhuhaha {
+            height: 300px;
+        }
+
         .center {
             text-align: center;
+        }
+
+        .ncenter {
+            text-align: left;
         }
 
         .parent {
@@ -136,8 +146,21 @@
         }
 
         #image {
-            width: 100px;
+            height: 330px;
             border-radius: 30px;
+        }
+
+        #white {
+            color: white;
+        }
+
+        #omsim {
+            width: 2000px;
+        }
+
+        .lesspadding {
+            padding-top: 0px;
+            padding-bottom: 0px;
         }
 
 
@@ -158,8 +181,8 @@
         </button>
     </div>
     <div id="spacer"></div>
-    <div id="container" class="parent">
-        <div class="center child" id="camera1">
+    <div id="container" class="container">
+        <div class="center camera1 huhuhaha" id="camera1">
             <h1 class="center">Camera 1</h1>
             <h2 id="statusText" class="center">Loading...</h2>
             <h2 class="center"></h2>
@@ -167,9 +190,14 @@
             <button id="confirmButton">Confirm</button>
             <button id="declineButton">Decline</button>
         </div>
-        <img id="image" class="child">
+        <img id="image">
     </div>
-
+    <div class="container">
+        <div class="camera1 ncenter white lesspadding" id="omsim">
+            <h2 id="location">Location: -</h2>
+            <h2 id="time">Time: -</h2>
+        </div>
+    </div>
 <!-- JAVASCRIPT -->
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
@@ -186,98 +214,116 @@ let statusTextEl = document.getElementById("statusText")
 let confirmButtonEl = document.getElementById("confirmButton")
 let declineButtonEl = document.getElementById("declineButton")
 let camera1DivEl = document.getElementById("camera1")
+let locationH2El = document.getElementById("location")
+let timeH2El = document.getElementById("time")
+
 
 onValue(alertsRef, (s) => {
 
-if (s.val() == null) return
+    if (s.val() == null) return
 
-let alertsArr = Object.entries(s.val())
-let audio = new Audio("ESPERalarm.mp3")
+    let alertsArr = Object.entries(s.val())
+    let audio = new Audio("ESPERalarm.mp3")
 
-let lastAlertStatus = alertsArr[alertsArr.length-1][1]["status"]
-let lastAlertType = alertsArr[alertsArr.length-1][1]["typeOfEmergency"]
-let alertoras = alertsArr[alertsArr.length-1][1]["timeCalled"]
-let alertpetsa = alertsArr[alertsArr.length-1][1]["date"]
+    let lastAlertStatus = alertsArr[alertsArr.length-1][1]["status"]
+    let lastAlertType = alertsArr[alertsArr.length-1][1]["typeOfEmergency"]
+    let alertoras = alertsArr[alertsArr.length-1][1]["timeCalled"]
+    let alertpetsa = alertsArr[alertsArr.length-1][1]["date"]
 
-if (lastAlertStatus == "unanswered") {
-
-    statusTextEl.innerHTML = lastAlertType
-    let imageEl = document.getElementById("image")
-
-    setTimeout(()=>{imageEl.setAttribute('src', "https://firebasestorage.googleapis.com/v0/b/esper1.appspot.com/o/" + formatDateTime(alertpetsa, alertoras) + ".jpg?alt=media&token=c2ab3301-8e8d-44bb-a27f-b2aeb6f06570")}, 2000)
-    
-    buttonStatus(false)
-
-    switch (lastAlertType) {
-        case "Police Alert!":
-            camera1DivEl.style.backgroundColor = "00bbff"
-
-        case "Medical Alert!":
-            camera1DivEl.style.backgroundColor = "ff0000"
+    if (lastAlertStatus == "unanswered") {
         
-        case "Disaster Alert!":
-            camera1DivEl.style.backgroundColor = "11ff00"
+        statusTextEl.innerHTML = lastAlertType
+        let imageEl = document.getElementById("image")
+        
+        setTimeout(()=>{imageEl.setAttribute('src', "https://firebasestorage.googleapis.com/v0/b/esper1.appspot.com/o/" + formatDateTime(alertpetsa, alertoras) + ".jpg?alt=media&token=c2ab3301-8e8d-44bb-a27f-b2aeb6f06570")}, 500)
+        
+        buttonStatus(false)
+        
+        locationH2El.innerHTML = "Location: 3JGR+JW8, MacArthur Hwy, San Fernando, Pampanga"
+        timeH2El.innerHTML = "Time: " + alertoras
+        
+        if (lastAlertType == "Police Alert!") {
+            camera1DivEl.style.backgroundColor = "rgba(0, 187, 255, 0.6)"
+        } else if (lastAlertType == "Medical Alert!") {
+            camera1DivEl.style.backgroundColor = "rgba(255, 0, 0, 0.6)"
+        } else if (lastAlertType == "Disaster Alert!") {
+            camera1DivEl.style.backgroundColor = "rgba(17, 255, 0, 0.6)"
+        }
+        //     case "Police Alert!":
+        //         camera1DivEl.style.backgroundColor = "rgba(0, 187, 255, 0.6)"
+        
+        //     case "Medical Alert!":
+        //         camera1DivEl.style.backgroundColor = "rgba(255, 0, 0, 0.6)"
+        
+        //     case "Disaster Alert!":
+        //         camera1DivEl.style.backgroundColor = "rgba(17, 255, 0, 0.6)"
+        //     default:
+        
+        // }
+        
+        audio.play()
+        
+        
+        
+    } else {
+        
+        statusTextEl.innerHTML = "Waiting for an alarm..."
+        
+        let imageEl = document.getElementById("image")
+        setTimeout(()=>{imageEl.setAttribute('src',"")},0)
+        
+        buttonStatus(true)
+        
+        camera1DivEl.style.backgroundColor = "rgba(0, 0, 0, 0.6)"
+
+        locationH2El.innerHTML = "Location: -"
+        timeH2El.innerHTML = "Time: -"
+        
+        
     }
-
-    audio.play()
-
-
-
-} else {
-
-    statusTextEl.innerHTML = "Waiting an alarm..."
-
-    let imageEl = document.getElementById("image")
-    setTimeout(()=>{imageEl.setAttribute('src',"")},0)
-
-    buttonStatus(true)
-
-    camera1DivEl.style.backgroundColor = "rgba(0, 0, 0, 0.6)"
-
-}
-
+    
 })
 
 function confirmButton() {
+    
+    get(alertsRef).then((s) => {
+        
+        if (s.val() == null) return
+        
+        let alertsArr = Object.entries(s.val())
+        let lastAlertID = alertsArr[alertsArr.length-1][0]
+        let lastAlertStatus = alertsArr[alertsArr.length-1][1]["status"]
+        
+        if (lastAlertStatus == "unanswered") {
+            
+            update(ref(database, "/"+lastAlertID+"/"), {
+                
+                status: "Confirmed",
+                timeResponded: getCurrentTime()
+                
+            })
 
-get(alertsRef).then((s) => {
-
-    if (s.val() == null) return
-
-    let alertsArr = Object.entries(s.val())
-    let lastAlertID = alertsArr[alertsArr.length-1][0]
-    let lastAlertStatus = alertsArr[alertsArr.length-1][1]["status"]
-
-    if (lastAlertStatus == "unanswered") {
-
-        update(ref(database, "/"+lastAlertID+"/"), {
-
-            status: "Confirmed",
-            timeResponded: getCurrentTime()
-
-        })
-
-    }
-
-})
-
+        }
+        
+    })
+    
 }
 
 function declineButton() {
-
-get(alertsRef).then((s) => {
-
-    if (s.val() == null) return
-
-    let alertsArr = Object.entries(s.val())
-    let lastAlertID = alertsArr[alertsArr.length-1][0]
-    let lastAlertStatus = alertsArr[alertsArr.length-1][1]["status"]
-
-    if (lastAlertStatus == "unanswered") {
-
-        update(ref(database, "/"+lastAlertID+"/"), {
-
-            status: "Declined",
+    
+    get(alertsRef).then((s) => {
+        
+        if (s.val() == null) return
+        
+        let alertsArr = Object.entries(s.val())
+        let lastAlertID = alertsArr[alertsArr.length-1][0]
+        let lastAlertStatus = alertsArr[alertsArr.length-1][1]["status"]
+        
+        if (lastAlertStatus == "unanswered") {
+            
+            update(ref(database, "/"+lastAlertID+"/"), {
+                
+                status: "Declined",
             timeResponded: getCurrentTime()
 
         })
